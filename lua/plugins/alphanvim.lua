@@ -67,8 +67,9 @@ return {
       dashboard.section.buttons.val = {
         dashboard.button("o", "  > Oil Explorer", ":ex .<CR>"),
         dashboard.button('r', '  > Recent files', ':Telescope oldfiles<CR>'),    
-        dashboard.button("w", "  > Find Word", ":Telescope live_grep<CR>"),
+        dashboard.button("w", "󰈞  > Find Word", ":Telescope live_grep<CR>"),
         dashboard.button("u", "󰒲  > Update plugins", ":Lazy update<CR>"),
+        dashboard.button("t", "  > Toggle Transparent", ":TransparentToggle<CR>"),
         dashboard.button('s', '  > Settings', ':e $MYVIMRC | pwd<CR>'),
         dashboard.button("q", "  > Quit", ":qa<cr>"),
       }
@@ -82,4 +83,3 @@ return {
     end
   }
 }
-
