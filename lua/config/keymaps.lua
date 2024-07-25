@@ -24,3 +24,5 @@ local function map(mode, lhs, rhs, opts)
     require("oil").toggle_float()
   end, { desc = "Open parent directory in floating window" })
   
+
+vim.api.nvim_set_keymap('n', '<leader>h', ':Alpha<CR>', { noremap = true, silent = true, desc = "Home Page" })

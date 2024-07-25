@@ -1,11 +1,44 @@
 --if true then return {} end
 
 return {
-    'goolord/alpha-nvim',
+
+  {
+    -- alpha-nvim for dashboard
+    "goolord/alpha-nvim",
+    dependencies = { "kyazdani42/nvim-web-devicons" },
+    event = "VimEnter",
     config = function()
-      local alpha = require 'alpha'
-      local dashboard = require 'alpha.themes.dashboard'
-      dashboard.section.header.val = {
+      local alpha = require("alpha")
+      local dashboard = require("alpha.themes.dashboard")
+
+      math.randomseed(os.time())
+
+      local function pick_color()
+        local colors = { "String", "Identifier", "Keyword", "Number" }
+        return colors[math.random(#colors)]
+      end
+
+      local function footer()
+        local total_plugins = #vim.tbl_keys(require('lazy').plugins())
+        local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
+        local version = vim.version()
+        local nvim_version_info = "  ⚡ Neovim Loaded.   Version " .. version.major .. "." .. version.minor .. "." .. version.patch
+        
+        return {
+
+          "          " .. datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info,
+          "",
+          "“All whose names were not found written in the book of life were thrown into the lake of fire.”",
+          " (Revelation 20:15)",
+          "",
+
+
+
+        }
+        
+      end
+
+      local logo = {
         [[]],
         [[=================     ===============     ===============   ========  ========]],
         [[\\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //]],
@@ -27,38 +60,26 @@ return {
         [[\   _-'                                                                `-_   /]],
         [[ `''                                                                      ``']]
       }
-      -- Set menu
+
+      dashboard.section.header.val = logo
+      dashboard.section.header.opts.hl = pick_color()
+
       dashboard.section.buttons.val = {
-        dashboard.button('e', '  > New file', ':ene <BAR> startinsert <CR>'),
-        dashboard.button('f', '󰈞  > Find file', ':Telescope find_files<CR>'),
-        dashboard.button('r', '  > Recent', ':Telescope oldfiles<CR>'),    
         dashboard.button("o", "  > Oil Explorer", ":ex .<CR>"),
-        dashboard.button("l", '󰒲  > Lazy Update', ':Lazy update<CR>'),
+        dashboard.button('r', '  > Recent files', ':Telescope oldfiles<CR>'),    
+        dashboard.button("w", "  > Find Word", ":Telescope live_grep<CR>"),
+        dashboard.button("u", "󰒲  > Update plugins", ":Lazy update<CR>"),
         dashboard.button('s', '  > Settings', ':e $MYVIMRC | pwd<CR>'),
-        dashboard.button('q', '  > Quit NVIM', ':qa<CR>'),
+        dashboard.button("q", "  > Quit", ":qa<cr>"),
       }
 
-      -- Define the footer
-      local function footer()
-          local version = "⚡ Neovim Loaded. Version " .. vim.version().major .. "." .. vim.version().minor
-          return {
-            "",
-            "The One Piece Is Real!",
-            version
-          }
-      end
       dashboard.section.footer.val = footer()
+      dashboard.section.footer.opts.hl = "Constant"
 
-      dashboard.config.opts.noautocmd = true
-      
-  
-      -- Disable folding on alpha buffer
-      vim.cmd [[
-      autocmd FileType alpha setlocal nofoldenable
-      ]]
-  
-      alpha.setup(dashboard.config)
-    end,
+      alpha.setup(dashboard.opts)
+
+      vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
+    end
   }
-
+}
 
