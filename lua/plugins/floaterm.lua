@@ -10,7 +10,8 @@ return {
 
             -- key bindings para normal e terminal mode
             vim.api.nvim_set_keymap('n', '<Leader>1', ':FloatermNew<CR>', { noremap = true, silent = true, desc = "New Terminal" })
-            vim.api.nvim_set_keymap('n', '<Leader>2', ':FloatermKill<CR>', { noremap = true, silent = true, desc = "Kill Terminal" })
+            vim.api.nvim_set_keymap('n', '<Leader>2', ':FloatermToggle<CR>', { noremap = true, silent = true, desc = "Toggle Terminal" })
+            vim.api.nvim_set_keymap('n', '<Leader>3', ':FloatermKill<CR>', { noremap = true, silent = true, desc = "Kill Terminal" })
         end
     }
 }
