@@ -3,7 +3,7 @@ return {
     {
       'mrcjkb/rustaceanvim',
       -- make sure to install rust-analyzer with '$ rustup component add rust-analyzer'
-      version = '^4', -- Recommended
+      version = '^5', -- Recommended
       lazy = false, -- This plugin is already lazy
       ft = { 'rust' },
       cmd = {},
